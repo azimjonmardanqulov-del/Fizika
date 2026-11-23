@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fizika 7-sinf</title>
+<style>
+  body{font-family:system-ui,sans-serif;margin:0;background:#f4f6fb;color:#1c2540}
+  header{background:#2447b8;color:#fff;padding:24px 16px;text-align:center}
+  header h1{margin:0;font-size:24px}
+  main{max-width:900px;margin:0 auto;padding:16px}
+  input{width:100%;box-sizing:border-box;padding:12px;font-size:16px;border:1px solid #bbc;border-radius:10px;margin-bottom:16px}
+  h2{margin:24px 0 8px;font-size:18px;color:#2447b8}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px}
+  a{display:block;background:#fff;padding:12px 14px;border-radius:10px;text-decoration:none;color:#1c2540;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+  a:hover{background:#e8eeff}
+</style>
+</head>
+<body>
+<header><h1>Fizika 7-sinf</h1><p>Darslar va nazorat ishlari</p></header>
+<main>
+<input id="q" placeholder="Qidirish...">
+<div id="list"></div>
+</main>
+<script>
+const groups = {
+ "1-chorak": [
+  ["01-fizik-hodisalar.html","Fizik hodisalar"],
+  ["02-muhim-tamoyillar.html","Muhim tamoyillar"],
+  ["03-konikmalar.html","Ko'nikmalar"],
+  ["04-laboratoriya-jihozlari.html","Laboratoriya jihozlari"],
+  ["05-texnika-xavfsizligi.html","Texnika xavfsizligi"],
+  ["06-fizika-va-texnologiya.html","Fizika va texnologiya"],
+  ["07-nazorat-ishi-1.html","Nazorat ishi 1"],
+  ["08-nima-uchun-olchash.html","Nima uchun o'lchash"],
+  ["09-kattaliklar-xbs.html","Kattaliklar va XBS"]
+ ],
+ "2-chorak": [
+  ["10-uzunlikni-olchash.html","Uzunlikni o'lchash"],
+  ["11-yuzani-olchash.html","Yuzani o'lchash"],
+  ["12-inson-tanasi-uzunligi.html","Inson tanasi uzunligi"],
+  ["13-nazorat-ishi-2.html","Nazorat ishi 2"],
+  ["14-xatolar-ustida-ishlash.html","Xatolar ustida ishlash"]
+ ]
+};
+const list=document.getElementById("list"), q=document.getElementById("q");
+function render(){
+  const s=q.value.toLowerCase(); list.innerHTML="";
+  for(const [g,files] of Object.entries(groups)){
+    const f=files.filter(x=>x[1].toLowerCase().includes(s));
+    if(!f.length) continue;
+    list.insertAdjacentHTML("beforeend",
+      <h2>${g}</h2><div class="grid">+
+      f.map(x=><a href="${encodeURI(x[0])}">${x[1]}</a>).join("")+</div>);
+  }
+}
+q.oninput=render; render();
+</script>
+</body>
+</html>
